@@ -1,19 +1,17 @@
-#! /bin/bash
-
+#! /bin/bash 
 
 # header protector
-[[ -z "$0_CONFIG_FILE__" ]] && {
-$0_CONFIG_FILE__=a
-echo $0_CONFIG_FILE__
-echo ${$0_CONFIG_FILE__}
-
+[[ -z "${__CONFIG_ENV__}" ]] && {
+__CONFIG_ENV__=a
 
 
 RUNTIME_DIR=/tmp
 INPUT_CHANEL=${RUNTIME_DIR}/input
 RUNNING_PID_FILE=${RUNTIME_DIR}/pids
 
+SERVER_IP=localhost
 PORT=5001
+WATCHED_FILE=file
 
 
 }

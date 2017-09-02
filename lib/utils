@@ -1,6 +1,6 @@
 #! /bin/bash
 
-INPUT_CHANEL="./input"
+source ../conf/env
 
 function log(){
 	datetime=$(date +'%Y-%m-%d %H:%M')
@@ -9,4 +9,8 @@ function log(){
 
 function input(){
 	echo "$@" >> ${INPUT_CHANEL}
+}
+
+function record_pid(){
+	echo "$?" >> ${RUNNING_PID_FILE}
 }
