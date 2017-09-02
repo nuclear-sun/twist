@@ -1,0 +1,19 @@
+#! /bin/bash
+
+
+# header protector
+[[ -z "$0_CONFIG_FILE__" ]] && {
+$0_CONFIG_FILE__=a
+echo $0_CONFIG_FILE__
+echo ${$0_CONFIG_FILE__}
+
+
+
+RUNTIME_DIR=/tmp
+INPUT_CHANEL=${RUNTIME_DIR}/input
+RUNNING_PID_FILE=${RUNTIME_DIR}/pids
+
+PORT=5001
+
+
+}

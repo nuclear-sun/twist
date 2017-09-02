@@ -1,0 +1,30 @@
+#! /bin/bash
+source ../lib/utils
+
+
+PORT=5001 
+INPUT_CHANEL=input
+
+function main(){
+	echo "Starting..."
+	# init
+	> ${INPUT_CHANEL}
+	while read line; do
+		echo $line
+		if [[ ${line:0:2} == "ci" ]]; then
+			nc -l $((++PORT)) > $(awk '{print $2}' <<<"${line}") &
+			log "await file command:""nc -l $((++PORT)) > $(awk '{print $2}' <<<"${line}") &"
+
+			sleep 2
+			# check nc status, then tell client
+			echo "ready" > ${INPUT_CHANEL}
+		elif [[ $line == "close" ]]; then
+			echo "hell, close"
+			exit
+		else
+			echo "else"
+		fi
+	done < <(nc -lk 5001 < <(tailf ${INPUT_CHANEL}))
+}
+
+main
