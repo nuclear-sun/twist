@@ -1,9 +1,6 @@
 #! /bin/bash
+source ../conf/env
 source ../lib/utils
-
-
-PORT=5001 
-INPUT_CHANEL=input
 
 function main(){
 	echo "Starting..."

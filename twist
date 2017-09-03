@@ -1,3 +1,23 @@
 #! /bin/bash
 
+function main(){
+	if [[ $# != 1 ]]; then 
+		echo "$0 .."
+		exit 1
+	fi
+	
+	local module=$1
 
+	case module:
+	cli | client )
+		(cli/client &> /dev/null & )
+		sleep 5
+		(mon/monitor &> /dev/null & )
+		;;
+	ser | server )
+		(ser/server &> dev/null & )
+		;;
+	esac
+}	
+
+main "$@"
