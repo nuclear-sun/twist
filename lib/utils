@@ -8,12 +8,16 @@ __lib_utils__=a
 
 
 function log(){
-	datetime=$(date +'%Y-%m-%d %H:%M')
+	local datetime=$(date +'%Y-%m-%d %H:%M')
 	echo "[${datetime}] $0 $@"
 }
 
-function input(){
+function send(){
 	echo "$@" >> ${INPUT_CHANEL}
+}
+
+function receive(){
+	echo 
 }
 
 function record_pid(){

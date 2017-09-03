@@ -5,13 +5,15 @@
 __CONFIG_ENV__=a
 
 
-RUNTIME_DIR=/tmp
+RUNTIME_DIR=/tmp/twist
+[[ ! -d ${RUNTIME_DIR} ]] && mkdir -p ${RUNTIME_DIR}
 INPUT_CHANEL=${RUNTIME_DIR}/input
 RUNNING_PID_FILE=${RUNTIME_DIR}/pids
 
 SERVER_IP=localhost
 PORT=5001
-WATCHED_FILE=file
 
+# deprecated
+WATCHED_FILE=file
 
 }

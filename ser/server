@@ -21,7 +21,7 @@ function main(){
 		else
 			echo "else"
 		fi
-	done < <(nc -lk 5001 < <(tailf ${INPUT_CHANEL}))
+	done < <(nc -lk ${PORT} < <(tailf ${INPUT_CHANEL}))
 }
 
 main
