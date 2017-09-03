@@ -2,6 +2,11 @@
 
 source ../conf/env
 
+# header protector
+[[ -z "${__lib_utils__}" ]] && {
+__lib_utils__=a
+
+
 function log(){
 	datetime=$(date +'%Y-%m-%d %H:%M')
 	echo "[${datetime}] $0 $@"
@@ -13,4 +18,8 @@ function input(){
 
 function record_pid(){
 	echo "$?" >> ${RUNNING_PID_FILE}
+}
+
+
+
 }
