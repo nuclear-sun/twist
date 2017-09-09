@@ -1,0 +1,23 @@
+#! /bin/bash
+
+source ${WORK_HOME}/conf/env
+
+function main(){
+
+	local app_name=$1
+	local role=$2
+
+	source ${app_name}
+
+	if [[ $role == 'cli' ]]; then 
+		${WORK_HOME}/inf/client &
+		sleep 5
+		state_machine_run cli &
+	elif [[ $role == 'ser' ]]; then 
+		${WORK_HOME}/inf/server &
+		sleep 5
+		${WORK_HOME}/inf/state_machine_run ser &
+	fi 
+}
+
+main "$@"

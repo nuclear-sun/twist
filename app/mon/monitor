@@ -1,0 +1,35 @@
+#! /bin/bash
+
+source ${WORK_HOME}/lib/utils
+
+WATCHED_FILE=file
+
+function cli_action(){
+	if [[ $1 == "ready" ]]; then
+		log $line
+		nc ${SERVER_IP} $((++PORT)) < ${WATCHED_FILE}
+		if [[ $? -eq 0 ]]; then
+			log "file transmitted"
+		else
+			log "file transmit failed"
+		fi
+	fi
+}
+
+function ser_action() {
+	if [[ ${1:0:2} == "ci" ]]; then
+		nc -l $((++PORT)) > $(awk '{print $2}' <<<"${1}") &
+		log "await file command:""nc -l $((++PORT)) > $(awk '{print $2}' <<<"${1}") &"
+		sleep 2
+		# check nc status, then tell client
+		send "ready"
+		#echo "ready" > ${INPUT_CHANEL}
+	elif [[ $1 == "close" ]]; then
+		echo "hell, close"
+		exit
+	else
+		echo "else"
+	fi
+}
+
+

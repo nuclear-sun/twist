@@ -1,0 +1,16 @@
+#! /bin/bash
+
+source ${WORK_HOME}/conf/env
+source ${WORK_HOME}/lib/utils
+
+function main(){
+	echo "Starting..."
+	# init
+	> ${INPUT_CHANEL}
+	> ${OUTPUT_CHANEL}
+	while read line; do
+		echo $line > ${OUTPUT_CHANEL}
+	done < <(nc -lk ${PORT} < <(tailf ${INPUT_CHANEL}))
+}
+
+main "$@"

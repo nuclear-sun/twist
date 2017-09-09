@@ -1,0 +1,16 @@
+#! /bin/bash
+
+source ${WORK_HOME}/lib/utils
+
+# param: $0 cli | ser
+function state_machine_run(){
+	local request="hello"
+	while true; do
+		send ${request}
+		# TODO exception $?
+		response=$(receive)
+		request=$(${1}_action ${response})
+	done
+}
+
+state_machine_run "$@"
