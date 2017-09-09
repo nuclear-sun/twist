@@ -11,13 +11,12 @@ function main(){
 
 	if [[ $role == 'cli' ]]; then 
 		${WORK_HOME}/inf/client &
-		sleep 5
-		state_machine_run cli &
 	elif [[ $role == 'ser' ]]; then 
 		${WORK_HOME}/inf/server &
-		sleep 5
-		${WORK_HOME}/inf/state_machine_run ser &
 	fi 
+	sleep 5
+	${WORK_HOME}/inf/state_machine_run ${app_name} ${role} &
+
 }
 
 main "$@"

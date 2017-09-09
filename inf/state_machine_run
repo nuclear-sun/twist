@@ -2,14 +2,17 @@
 
 source ${WORK_HOME}/lib/utils
 
-# param: $0 cli | ser
+# param: $0 appname cli | ser
 function state_machine_run(){
+	source $1
 	local request="hello"
 	while true; do
+		request=$($2_request)
+		[[ -z  request ]] && request="hello"
 		send ${request}
 		# TODO exception $?
 		response=$(receive)
-		request=$(${1}_action ${response})
+		request=$(${2}_action ${response})
 	done
 }
 

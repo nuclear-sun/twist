@@ -2,12 +2,13 @@
 
 source ${WORK_HOME}/lib/utils
 
-WATCHED_FILE=file
+WATCHED_DIR=/tt
+COUNT=0
 
 function cli_action(){
 	if [[ $1 == "ready" ]]; then
 		log $line
-		nc ${SERVER_IP} $((++PORT)) < ${WATCHED_FILE}
+		nc ${SERVER_IP} $((++PORT)) < $2
 		if [[ $? -eq 0 ]]; then
 			log "file transmitted"
 		else
@@ -32,4 +33,26 @@ function ser_action() {
 	fi
 }
 
+
+function cli_request() {
+	if [[ COUNT -eq 10 ]] ; then
+		echo "ci /home/sun/temp"
+		COUNT=0
+	fi	
+}
+
+# server shouldn't push the machine ?!
+function ser_request() {
+	echo 
+}
+
+function file_change_mon(){
+	
+}
+
+function cli_init() {
+	find ${WATCHED_DIR} | tee ${RUNTIME_DIR}/.dir | xargs stat -c %Y > ${RUNTIME_DIR}/.record
+	paste ${RUNTIME_DIR}/.dir ${RUNTIME_DIR}/.record > ${RUNTIME_DIR}/dir_record 
+	# write to mem
+}
 
