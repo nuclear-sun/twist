@@ -8,10 +8,16 @@ __CONFIG_ENV__=a
 RUNTIME_DIR=/tmp/twist
 [[ ! -d ${RUNTIME_DIR} ]] && mkdir -p ${RUNTIME_DIR}
 INPUT_CHANEL=${RUNTIME_DIR}/input
+OUTPUT_CHANEL=${RUNTIME_DIR}/output
 RUNNING_PID_FILE=${RUNTIME_DIR}/pids
 
 SERVER_IP=localhost
 PORT=5001
+
+#WORK_HOME=$(cd $(dirname $0);pwd)
+
+# log output
+LOG_DIR=${WORK_HOME}/log
 
 # deprecated
 WATCHED_FILE=file
